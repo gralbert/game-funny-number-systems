@@ -1,9 +1,8 @@
-import pygame
-import sys
 from StartActivity import StartActivity
 from GameActivity import GameActivity
 from StaticObjects import *
 from collections import defaultdict
+from GameOver import GameOver
 
 
 class Game:
@@ -31,13 +30,24 @@ class Game:
                               self.keydown_handlers, self.mouse_handlers)
         new_game = GameActivity(self.font, self.surface,
                                 self.keydown_handlers, self.mouse_handlers,
-                                'gg', 1)
+                                'NoName', 1)
+        game_over = GameOver(self.font, self.surface,
+                              self.keydown_handlers, self.mouse_handlers, '', 2)
 
+        interval = 0
         while not self.game_over:
             if start.status:
                 start.show()
             else:
                 new_game.show()
+                interval += 1
+                if interval == 250:
+                    new_game.new_cloud()
+                    interval = 0
+                new_game.upd_lives()
+                if new_game.lives <= 0:
+                    game_over.show()
+
             pygame.display.update()
             self.clock.tick(self.frame_rate)
 

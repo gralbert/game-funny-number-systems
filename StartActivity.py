@@ -1,6 +1,5 @@
-import pygame
 from StaticObjects import *
-
+import sys
 
 class StartActivity:
     def __init__(self, font, surface, keydown_handlers, mouse_handlers):
@@ -11,13 +10,13 @@ class StartActivity:
         self.mouse_handlers = mouse_handlers
         self.background_image = \
             pygame.image.load('img/bg-1.jpg')
-        self.objects = [InputBox(200, 250, 140, 32, self.font),
-                        ButtonChoose(200, 350, 200, 32, self.font, '       EASY', False),
-                        ButtonChoose(200, 400, 200, 32, self.font, '      MEDIUM', True),
-                        ButtonChoose(200, 450, 200, 32, self.font, '       HARD', False),
-                        ButtonStart(100, 530, 400, 32, self.font, '                   START', True),
-                        TextObject(200, 200, lambda: 'Your name: ', (0, 0, 150), 'Impact', 30),
-                        TextObject(200, 300, lambda: ' Difficult: ', (0, 0, 150), 'Impact', 30)]
+        self.objects = [InputBox(220, 250, 140, 32, self.font),
+                        ButtonChoose(220, 350, 200, 32, self.font, '       EASY', False),
+                        ButtonChoose(220, 400, 200, 32, self.font, '      MEDIUM', True),
+                        ButtonChoose(220, 450, 200, 32, self.font, '       HARD', False),
+                        ButtonStart(130, 530, 400, 32, self.font, '                   START', True),
+                        TextObject(220, 200, lambda: 'Your name: ', (0, 0, 150), 'Impact', 30),
+                        TextObject(220, 300, lambda: 'Number systems: ', (0, 0, 150), 'Impact', 30)]
 
     def update(self):
         for o in self.objects:

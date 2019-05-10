@@ -1,5 +1,6 @@
 import pygame
 
+
 class InputBox:
 
     def __init__(self, x, y, w, h, font, text=''):
@@ -30,10 +31,11 @@ class InputBox:
         self.rect.w = width
 
     def draw(self, screen):
-        # Blit the text.
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
-        # Blit the rect.
         pygame.draw.rect(screen, self.color, self.rect, 2)
+
+    def get_text(self):
+        return self.text
 
 
 class Button:
@@ -56,9 +58,7 @@ class Button:
         self.rect.w = self.width
 
     def draw(self, screen):
-        # Blit the text.
         screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
-        # Blit the rect.
         pygame.draw.rect(screen, self.color, self.rect, 2)
 
 
@@ -66,19 +66,18 @@ class ButtonStart(Button):
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
-                print('tu')
+                print('Start!')
 
 
 class ButtonChoose(Button):
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            # If the user clicked on the input_box rect.
+            # If the user clicked on the box rect.
             if self.rect.collidepoint(event.pos):
-                # Toggle the active variable.
                 self.active = not self.active
             else:
                 self.active = False
-            # Change the current color of the input box.
+            # Change the current color of the box.
             self.color = Button.COLOR_ACTIVE if self.active \
                 else Button.COLOR_INACTIVE
             self.txt_surface = self.font.render(self.text, True, self.color)
